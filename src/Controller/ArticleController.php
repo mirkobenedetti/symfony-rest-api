@@ -16,20 +16,13 @@ use Symfony\Component\Serializer\Serializer;
 
 class ArticleController extends AbstractFOSRestController {
 
-    private function returnNormalized($param) : array
+    private function returnNormalized($param)
     {
         $encoders = [new JsonEncoder()];
         $normalizers = [new ObjectNormalizer()];
         $serializer = new Serializer($normalizers, $encoders);
 
-        $articles = is_array($param) ? $param : array($param);
-        $output = array();
-
-        foreach ($articles as $article) {
-            $output[] = $serializer->serialize($article, 'json');
-        };
-
-        return $output;
+        return $serializer->serialize($param, 'json');
     }
 
     private function getArticleById(Request $request)
