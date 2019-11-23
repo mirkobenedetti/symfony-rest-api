@@ -74,11 +74,11 @@ class ArticleController extends AbstractFOSRestController {
      */
     public function getArticles(): View
     {
-        $article = $this->getDoctrine()
+        $articles = $this->getDoctrine()
             ->getRepository('App\Entity\Article')
             ->findAll();
 
-        return View::create($this->returnNormalized($article), Response::HTTP_OK);
+        return View::create($this->returnNormalized($articles), Response::HTTP_OK);
     }
 
     /**
